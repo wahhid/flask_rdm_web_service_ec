@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block content %}
+<div>
+    <form method="POST" action="/process">            
+        <table>
+            <tr>
+                <td>Ticket ID</td>
+                <td>{{ticket_id}}</td>                
+            </tr>
+            <tr>                
+                <td>Approved Status</td>
+                <td>
+                    <select name="approved_state">
+                        <option value="2">Approve</option>
+                        <option value="3">Reject</option>
+                    </select>   
+                </td>        
+            </tr>
+            <tr>
+                <td>Comment</td>
+                <td><textarea name="comment" rows="4" cols="50"></textarea></td>            
+            </tr>                        
+            <tr>
+                <td></td>
+                <td><input type="submit" name="submit"/></td>                    
+            </tr>
+        </table>
+        <input type="hidden" name="ticket_id" value="{{ticket_id}}"/>
+    </form>
+</div>
+{% endblock %}

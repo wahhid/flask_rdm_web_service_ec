@@ -1,0 +1,14 @@
+<html>
+  <head>
+    {% if title %}
+    <title>{{title}} - ITMS</title>
+    {% else %}
+    <title>Asset Scanner  - ITMS</title>
+    {% endif %}
+  </head>
+  <body>        
+  <center>
+      {% block content %}{% endblock %}
+  </center>    
+  </body>
+</html>
