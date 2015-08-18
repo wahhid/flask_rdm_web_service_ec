@@ -9,7 +9,7 @@ import sys
 
 user = 'admin'
 pwd = 'P@ssw0rd'
-dbname = 'rdm_dev'
+dbname = 'rdm_live'
 server = 'localhost'
 port = '8069'
 
@@ -209,7 +209,7 @@ def changepassword():
         else:
             return jsonify(success='false',message='Change Password Failed or Old Password Wrong',results=[])
                   
-@app.route('/requestchangepassword')           
+@app.route('/api/v1/requestchangepassword')           
 def requestchangepassword():
     if request.method == 'GET':
         email = request.args['email']
@@ -229,7 +229,7 @@ def requestchangepassword():
         else:
             return jsonify(success='false',message='Request Change Password Failed',results=[])
 
-@app.route('/resetpassword')           
+@app.route('/api/v1/resetpassword')           
 def resetpassword():
     if request.method == 'GET':
         customer_id = request.args['customer_id']
@@ -393,7 +393,7 @@ def myreward():
                 return jsonify(success='false',results=[])            
         return jsonify(success='false',results=[])
     
-@app.route('/usulan')
+@app.route('/api/v1/usulan')
 @auth.login_required
 def usulan():        
     if request.method == 'GET':
@@ -420,7 +420,7 @@ def usulan():
         else:
             return jsonify(success='false',message='Error while saving',results=[])
 
-@app.route('/messagecategorydropdown')
+@app.route('/api/v1/messagecategorydropdown')
 @auth.login_required
 def messagecategorydropdown():    
     sock = xmlrpclib.ServerProxy('http://' + server + ':' + port +'/xmlrpc/common')
@@ -433,7 +433,7 @@ def messagecategorydropdown():
         data = sock.execute(dbname, uid, pwd, 'rdm.tenant.message.category', 'read', ids, fields)                                 
         return jsonify(success='true',results=data)
     
-@app.route('/usulanlist')
+@app.route('/api/v1/usulanlist')
 @auth.login_required
 def usulanlist():
     if request.method == 'GET':
