@@ -9,7 +9,7 @@ import sys
 
 user = 'admin'
 pwd = 'P@ssw0rd'
-dbname = 'rdm_live'
+dbname = 'rdm_dev'
 server = 'localhost'
 port = '8069'
 
