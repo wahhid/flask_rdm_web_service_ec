@@ -73,8 +73,7 @@ def login():
     #username = request.json.get('username')
     #password = request.json.get('password')
     #username = request.form['username']
-    #password = request.form['password']
-    
+    #password = request.form['password']    
     username = request.args.get('username')    
     password = request.args.get('password')
     
