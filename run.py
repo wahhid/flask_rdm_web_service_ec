@@ -68,17 +68,24 @@ def verify_password(username_or_token, password):
     g.member = member
     return True
 
-@app.route('/api/v1/login', methods=['POST'])
+@app.route('/api/v1/login', methods=['GET'])
 def login():
-    username = request.json.get('username')
-    password = request.json.get('password')
+    #username = request.json.get('username')
+    #password = request.json.get('password')
+    #username = request.form['username']
+    #password = request.form['password']
+    
+    username = request.args.get('username')    
+    password = request.args.get('password')
+    
     sock = xmlrpclib.ServerProxy('http://' + server + ':' + port +'/xmlrpc/common')
     uid = sock.login(dbname , user , pwd)
     sock = xmlrpclib.ServerProxy('http://' + server + ':' + port + '/xmlrpc/object')                
     args = [('email','=',username),('password','=',password)]            
     ids = sock.execute(dbname, uid, pwd, 'rdm.customer', 'search', args)  
     if not ids:
-        abort(400)
+        #abort(400)
+        return jsonify({'success':False,'message':'Error','result':[{}]})
     fields = []
     customer = sock.execute(dbname, uid, pwd, 'rdm.customer', 'read', ids[0], fields)
     member = Member(customer)
